@@ -6,9 +6,9 @@ import {MatSort, Sort} from "@angular/material/sort";
 import {LiveAnnouncer} from "@angular/cdk/a11y";
 import {MatDialog} from "@angular/material/dialog";
 import {FormComponent} from "../form/form.component";
-import {StudentsListService} from "../../services/students-list.service";
 import {CdkDragDrop, moveItemInArray} from "@angular/cdk/drag-drop";
 import {map, Subject, takeUntil} from "rxjs";
+import {StudentsListService} from "../services/students-list.service";
 
 
 @Component({
@@ -32,17 +32,17 @@ export class TableComponent implements OnInit, OnDestroy{
     public dialog: MatDialog,
   )
   {
-    this.displayedColumns = ['name', 'surname', 'age', 'edit-btn', 'btnDelete'];
+    this.displayedColumns = ['name', 'surname', 'age', 'edit-btn', 'btn-delete'];
     this.unsubscribe$ = new Subject<boolean>();
+  }
+
+  ngOnInit() {
+    this.getAllStudents();
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next(true);
     this.unsubscribe$.complete();
-  }
-
-  ngOnInit() {
-    this.getAllStudents();
   }
 
   public search($event: any) {
@@ -102,7 +102,6 @@ export class TableComponent implements OnInit, OnDestroy{
   public deleteStudent(id: string) {
       this.studentService.deleteStudent(id).pipe(
         takeUntil(this.unsubscribe$)
-      ).subscribe();
-      this.getAllStudents();
+      ).subscribe(() =>   this.getAllStudents());
   }
 }

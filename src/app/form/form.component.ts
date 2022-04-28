@@ -1,9 +1,9 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {StudentsListService} from "../../services/students-list.service";
 import {IDialogData} from "../models/idialog-data";
 import {Subject, takeUntil} from "rxjs";
+import {StudentsListService} from "../services/students-list.service";
 
 @Component({
   selector: 'app-form',
@@ -22,18 +22,16 @@ export class FormComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private studentService: StudentsListService
   )
-  {
-    this.unsubscribe$ = new Subject<boolean>();
-  }
-
-  ngOnDestroy(): void {
-      this.unsubscribe$.next(true);
-      this.unsubscribe$.complete();
-  }
+  { this.unsubscribe$ = new Subject<boolean>(); }
 
   ngOnInit(): void {
     this.definitionTarget(this.data)
     this.formInitialization();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next(true);
+    this.unsubscribe$.complete();
   }
 
   private formInitialization() {
@@ -54,16 +52,13 @@ export class FormComponent implements OnInit, OnDestroy {
       surname: this.form.value.surname,
       age: this.form.value.age
     }).pipe(
-      takeUntil(this.unsubscribe$)
-    ).subscribe();
-    this.dialogRef.close();
+      takeUntil(this.unsubscribe$)).subscribe(() =>  this.dialogRef.close());
   }
 
   public editStudent() {
     this.studentService.updateStudentInfo(this.form.value, this.data.object.id).pipe(
       takeUntil(this.unsubscribe$)
-    ).subscribe();
-    this.dialogRef.close()
+    ).subscribe(() => this.dialogRef.close());
   }
 
   public definitionTarget(currentTarget: IDialogData) {
