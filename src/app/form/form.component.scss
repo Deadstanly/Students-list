@@ -1,0 +1,13 @@
+.form-menu {
+  display: flex;
+  flex-direction: column;
+  .input {
+    margin: 10px;
+    padding: 10px;
+  }
+  .btn {
+    margin: 10px;
+  }
+}
+
+

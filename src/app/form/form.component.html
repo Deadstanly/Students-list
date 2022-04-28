@@ -1,0 +1,16 @@
+<form [formGroup]="form" class="form-menu">
+  <mat-form-field appearance="fill">
+    <mat-label>Name</mat-label>
+    <input autocomplete="off" matInput formControlName="name" placeholder="name">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Surname</mat-label>
+    <input autocomplete="off" matInput formControlName="surname" placeholder="surname">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Age</mat-label>
+    <input autocomplete="off" matInput formControlName="age" placeholder="age">
+  </mat-form-field>
+  <button [disabled]="form.invalid" class="btn" (click)="target ? createStudent() : editStudent()" mat-raised-button color="primary">Submit</button>
+  <button class="btn-close btn" (click)="closeModal()"  mat-stroked-button color="warn">Close modal</button>
+</form>
