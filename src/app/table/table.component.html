@@ -35,7 +35,7 @@
         <th mat-header-cell cdkDrag  *matHeaderCellDef>Update information</th>
         <td mat-cell *matCellDef="let element"><button class="update-btn" mat-stroked-button color="primary" (click)="editStudent(element)">Update info</button></td>
       </ng-container>
-      <ng-container matColumnDef="btnDelete">
+      <ng-container matColumnDef="btn-delete">
         <th mat-header-cell cdkDrag *matHeaderCellDef>Remove info from the list</th>
         <td mat-cell *matCellDef="let element"><button class="delete-btn" mat-stroked-button color="primary" (click)="deleteStudent(element.id)">Delete student</button></td>
       </ng-container>

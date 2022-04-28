@@ -17,7 +17,7 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import { FormComponent } from './form/form.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {ReactiveFormsModule} from "@angular/forms";
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientModule} from "@angular/common/http";
 
 
 @NgModule({
